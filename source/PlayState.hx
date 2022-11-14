@@ -1125,6 +1125,7 @@ class PlayState extends MusicBeatState
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
 			}
+		}
 
 		startedCountdown = true;
 		Conductor.songPosition = 0;

@@ -395,25 +395,7 @@ class FunkinLua {
 			lePlayState.songScore += value;
 			lePlayState.RecalculateRating();
 		});
-		Lua_helper.add_callback(lua, "addMisses", function(value:Int = 0) {
-			lePlayState.songMisses += value;
-			lePlayState.RecalculateRating();
-		});
-		Lua_helper.add_callback(lua, "addHits", function(value:Int = 0) {
-			lePlayState.songHits += value;
-			lePlayState.RecalculateRating();
-		});
 		Lua_helper.add_callback(lua, "setScore", function(value:Int = 0) {
-			lePlayState.songScore = value;
-			lePlayState.RecalculateRating();
-		});
-		Lua_helper.add_callback(lua, "setMisses", function(value:Int = 0) {
-			lePlayState.songMisses = value;
-			lePlayState.RecalculateRating();
-		});
-		Lua_helper.add_callback(lua, "setHits", function(value:Int = 0) {
-			lePlayState.songHits = value;
-			lePlayState.RecalculateRating();
 		});
 		
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {
@@ -482,77 +464,12 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "getSongPosition", function() {
 			return Conductor.songPosition;
 		});
-
-		Lua_helper.add_callback(lua, "getCharacterX", function(type:String) {
-			switch(type.toLowerCase()) {
-				case 'dad':
-					return lePlayState.DAD_X;
-				case 'gf' | 'girlfriend':
-					return lePlayState.GF_X;
-				default:
-					return lePlayState.BF_X;
-			}
-		});
-		Lua_helper.add_callback(lua, "setCharacterX", function(type:String, value:Float) {
-			switch(type.toLowerCase()) {
-				case 'dad':
-					lePlayState.DAD_X = value;
-					lePlayState.dadGroup.forEachAlive(function (char:Character) {
-						char.x = lePlayState.DAD_X + char.positionArray[0];
-					});
-				case 'gf' | 'girlfriend':
-					lePlayState.BF_X = value;
-					lePlayState.boyfriendGroup.forEachAlive(function (char:Boyfriend) {
-						char.x = lePlayState.BF_X + char.positionArray[0];
-					});
-				default:
-					lePlayState.GF_X = value;
-					lePlayState.gfGroup.forEachAlive(function (char:Character) {
-						char.x = lePlayState.GF_X + char.positionArray[0];
-					});
-			}
-		});
-		Lua_helper.add_callback(lua, "getCharacterY", function(type:String) {
-			switch(type.toLowerCase()) {
-				case 'dad':
-					return lePlayState.DAD_Y;
-				case 'gf' | 'girlfriend':
-					return lePlayState.GF_Y;
-				default:
-					return lePlayState.BF_Y;
-			}
-		});
-		Lua_helper.add_callback(lua, "setCharacterY", function(type:String, value:Float) {
-			switch(type.toLowerCase()) {
-				case 'dad':
-					lePlayState.DAD_Y = value;
-					lePlayState.dadGroup.forEachAlive(function (char:Character) {
-						char.y = lePlayState.DAD_Y + char.positionArray[1];
-					});
-				case 'gf' | 'girlfriend':
-					lePlayState.GF_Y = value;
-					lePlayState.gfGroup.forEachAlive(function (char:Character) {
-						char.y = lePlayState.GF_Y + char.positionArray[1];
-					});
-				default:
-					lePlayState.BF_Y = value;
-					lePlayState.boyfriendGroup.forEachAlive(function (char:Boyfriend) {
-						char.y = lePlayState.BF_Y + char.positionArray[1];
-					});
-			}
-		});
 		Lua_helper.add_callback(lua, "cameraSetTarget", function(target:String) {
 			var isDad:Bool = false;
 			if(target == 'dad') {
 				isDad = true;
 			}
 			lePlayState.moveCamera(isDad);
-		});
-		Lua_helper.add_callback(lua, "setRatingPercent", function(value:Float) {
-			lePlayState.ratingPercent = value;
-		});
-		Lua_helper.add_callback(lua, "setRatingString", function(value:String) {
-			lePlayState.ratingString = value;
 		});
 		Lua_helper.add_callback(lua, "getMouseX", function(camera:String) {
 			var cam:FlxCamera = lePlayState.camGame;
@@ -570,27 +487,8 @@ class FunkinLua {
 			}
 			return FlxG.mouse.getScreenPosition(cam).y;
 		});
-		Lua_helper.add_callback(lua, "spawnNoteSplashes", function(x:Float, y:Float, data:Int = 0, type:Int = 0) {
-			lePlayState.spawnNoteSplash(x, y, data, type);
-		});
 		Lua_helper.add_callback(lua, "characterPlayAnim", function(character:String, anim:String, ?forced:Bool = false) {
 			switch(character.toLowerCase()) {
-				case 'dad':
-					if(lePlayState.dad.animOffsets.exists(anim))
-						lePlayState.dad.playAnim(anim, forced);
-				case 'gf' | 'girlfriend':
-					if(lePlayState.gf.animOffsets.exists(anim))
-						lePlayState.gf.playAnim(anim, forced);
-				default: 
-					if(lePlayState.boyfriend.animOffsets.exists(anim))
-						lePlayState.boyfriend.playAnim(anim, forced);
-			}
-		});
-		Lua_helper.add_callback(lua, "characterDance", function(character:String) {
-			switch(character.toLowerCase()) {
-				case 'dad': lePlayState.dad.dance();
-				case 'gf' | 'girlfriend': lePlayState.gf.dance();
-				default: lePlayState.boyfriend.dance();
 			}
 		});
 
@@ -689,16 +587,6 @@ class FunkinLua {
 				return Reflect.setProperty(sprites.get(tag), variable, value);
 			}
 		});
-		Lua_helper.add_callback(lua, "startDialogue", function(dialogueFile:String, ?song:String = null) {
-			if(FileSystem.exists(Paths.mods('data/' + dialogueFile + '.txt'))) {
-				var shit:Array<String> = File.getContent(Paths.mods('data/' + dialogueFile + '.txt')).trim().split('\n');
-				for (i in 0...shit.length) {
-					shit[i] = shit[i].trim();
-				}
-				lePlayState.dialogueIntro(shit, song);
-			}
-		});
-		call('onCreate', []);
 		#end
 	}
 
