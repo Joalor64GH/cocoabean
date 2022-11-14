@@ -103,8 +103,6 @@ class PlayState extends MusicBeatState
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
 
-	private var timeBar:Float = 0;
-
 	private var generatedMusic:Bool = false;
 	private var startingSong:Bool = false;
 	private var updateTime:Bool = true;
@@ -113,9 +111,6 @@ class PlayState extends MusicBeatState
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
-
-	public static var timeBG:FlxSprite;
-	public static var timeBar:FlxBar;
 
 	var dialogue:Array<String> = ['strange code', '>:]'];
 
@@ -808,30 +803,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
-		if (FlxG.save.data.timebar)
-			{
-				timeBG = new FlxSprite(0, 10).loadGraphic(Paths.image('UI/default/timeBar'));
-				if (FlxG.save.data.downscroll)
-					timeBG.y = FlxG.height * 0.9 + 45; 
-				timeBG.screenCenter(X);
-				timeBG.scrollFactor.set();
-				add(timeBG);
-				
-				timeBar = new FlxBar(timeBG.x + 4, timeBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBG.width - 8), Std.int(timeBG.height - 8), this,
-					'songPositionBar', 0, 90000);
-				timeBar.scrollFactor.set();
-				timeBar.createFilledBar(FlxColor.GRAY, FlxColor.LIME);
-				add(timeBar);
-	
-				var songName = new FlxText(timeBG.x + (timeBG.width / 2) - 20,timeBG.y,0,SONG.song, 16);
-				if (FlxG.save.data.downscroll)
-					songName.y -= 3;
-				songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-				songName.scrollFactor.set();
-				add(songName);
-				songName.cameras = [camHUD];
-			}
-
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('UI/default/healthBar'));
 		if (FlxG.save.data.downscroll)
 			healthBarBG.y = 50;
@@ -883,11 +854,6 @@ class PlayState extends MusicBeatState
 		missesTxt.cameras = [camHUD];
 		chocoTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
-		if (FlxG.save.data.timebar)
-		{
-			timeBG.cameras = [camHUD];
-			timeBar.cameras = [camHUD];
-		}
 
 		startingSong = true;
 
@@ -1229,38 +1195,6 @@ class PlayState extends MusicBeatState
 		#if desktop
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-
-		if (FlxG.save.data.timebar)
-		{
-			remove(timeBG);
-			remove(timeBar);
-			remove(songName);
-
-			timeBG = new FlxSprite(0, 10).loadGraphic(Paths.image('healthBar'));
-			if (FlxG.save.data.downscroll)
-				timeBG.y = FlxG.height * 0.9 + 45; 
-			timeBG.screenCenter(X);
-			timeBG.scrollFactor.set();
-			add(timeBG);
-
-			timeBar = new FlxBar(timeBG.x + 4, timeBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBG.width - 8), Std.int(timeBG.height - 8), this,
-				'songPositionBar', 0, songLength - 1000);
-			timeBar.numDivisions = 1000;
-			timeBar.scrollFactor.set();
-			timeBar.createFilledBar(FlxColor.GRAY, FlxColor.LIME);
-			add(timeBar);
-
-			var songName = new FlxText(timeBG.x + (timeBG.width / 2) - 20,timeBG.y,0,SONG.song, 16);
-			if (FlxG.save.data.downscroll)
-				songName.y -= 3;
-			songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-			songName.scrollFactor.set();
-			add(songName);
-
-			timeBG.cameras = [camHUD];
-			timeBar.cameras = [camHUD];
-			songName.cameras = [camHUD];
-		}
 
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC, true, songLength);
