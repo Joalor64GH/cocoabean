@@ -1646,7 +1646,7 @@ class PlayState extends MusicBeatState
 						vocals.pause();
 					}
 					openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-
+                }
 			#if desktop
 			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconRPC);
 			#end
