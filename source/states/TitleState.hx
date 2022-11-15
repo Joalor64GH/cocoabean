@@ -1,4 +1,4 @@
-package;
+package states;
 
 import shaders.BuildingShaders;
 import shaders.ColorSwap;
@@ -33,7 +33,7 @@ import lime.app.Application;
 import openfl.Assets;
 import flixel.input.keyboard.FlxKey;
 #if MODS_ALLOWED
-import ModsMenuState;
+import states.ModsMenuState;
 import modding.PolymodHandler;
 import modding.ModList;
 import polymod.Polymod;
@@ -41,6 +41,7 @@ import polymod.Polymod.Framework;
 import polymod.Polymod.PolymodError;
 #end
 import states.*;
+import userInterface.*;
 
 using StringTools;
 

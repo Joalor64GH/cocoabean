@@ -7,6 +7,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import openfl.Assets;
+import states.*;
 
 class DonateScreenState extends MusicBeatState
 {

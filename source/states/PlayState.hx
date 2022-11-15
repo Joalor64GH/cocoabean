@@ -1,4 +1,4 @@
-package;
+package states;
 
 import video.Cutscene;
 #if MODS_ALLOWED
@@ -13,7 +13,7 @@ import sys.io.File;
 import sys.FileSystem;
 #end
 import Section.SwagSection;
-import Song.SwagSong;
+import parser.Song.SwagSong;
 import WiggleEffect.WiggleEffectType;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
@@ -52,9 +52,12 @@ import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import lime.app.Application;
 import openfl.events.KeyboardEvent;
-import Character;
+import parser.Character;
 import LLua;
 import states.*;
+import substates.*;
+import parser.*;
+import userInterface.*;
 import animate.FlxAnimate;
 import video.FlxVideo;
 

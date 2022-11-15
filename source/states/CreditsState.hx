@@ -19,6 +19,7 @@ import openfl.Assets;
 import sys.io.File;
 import sys.FileSystem;
 #end
+import states.*;
 
 using StringTools;
 

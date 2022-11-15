@@ -1,4 +1,4 @@
-package;
+package userInterface;
 
 import flixel.FlxSprite;
 import openfl.utils.Assets;

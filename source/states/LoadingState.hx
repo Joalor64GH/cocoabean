@@ -1,4 +1,4 @@
-package;
+package states;
 
 import lime.app.Promise;
 import lime.app.Future;
@@ -12,6 +12,7 @@ import lime.utils.Assets as LimeAssets;
 import lime.utils.AssetLibrary;
 import lime.utils.AssetManifest;
 import haxe.io.Path;
+import states.*;
 
 class LoadingState extends MusicBeatState
 {

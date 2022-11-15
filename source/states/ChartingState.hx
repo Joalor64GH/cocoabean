@@ -1,4 +1,4 @@
-package;
+package states;
 
 import Conductor.BPMChangeEvent;
 import Section.SwagSection;
@@ -35,6 +35,7 @@ import flixel.util.FlxTimer;
 #if MODS_ALLOWED
 import polymod.backends.PolymodAssets;
 #end
+import states.*;
 
 using StringTools;
 

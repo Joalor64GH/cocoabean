@@ -1,4 +1,4 @@
-package;
+package userInterface;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -9,6 +9,7 @@ import flixel.input.FlxKeyManager;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import states.*;
 
 using StringTools;
 

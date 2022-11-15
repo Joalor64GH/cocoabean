@@ -1,7 +1,8 @@
-package;
+package userInterface;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import states.*;
 
 class NoteSplash extends FlxSprite
 {

@@ -1,4 +1,4 @@
-package;
+package parser;
 
 import Section.SwagSection;
 import haxe.Json;

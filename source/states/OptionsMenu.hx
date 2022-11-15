@@ -1,4 +1,4 @@
-package;
+package states;
 
 import Controls.KeyboardScheme;
 import Controls.Control;
@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import states.*;
 
 class OptionsMenu extends MusicBeatState
 {

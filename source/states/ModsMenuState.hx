@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package;
+package states;
 
 import modding.ModList;
 import modding.PolymodHandler;
@@ -32,6 +32,8 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 import lime.utils.Assets;
+import states.*;
+import userInterface.*;
 
 class ModsMenuState extends MusicBeatState
 {

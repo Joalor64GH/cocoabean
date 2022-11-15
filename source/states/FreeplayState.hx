@@ -1,4 +1,4 @@
-package;
+package states;
 
 #if desktop
 import Discord.DiscordClient;
@@ -17,6 +17,8 @@ import sys.io.File;
 import sys.FileSystem;
 import polymod.backends.PolymodAssets;
 #end
+import states.*;
+import userInterface.*;
 
 using StringTools;
 
